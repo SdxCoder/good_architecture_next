@@ -177,18 +177,7 @@ Handles data access, API communication, and data transformation.
 
 ### 🔄 Unidirectional Flow
 
-UI Components
-↓
-Hooks
-↓
-Stores (Domain)
-↓
-Repository (Domain Abstraction)
-↓
-Repository (Data Implementation)
-↓
-Service (API/DTO)
-
+UI Components → Hooks → Stores (Domain) → Repository (Domain Abstraction) → Repository (Data Implementation) → Service (API/DTO)
 
 - **Data flows up** (from service to UI).
 - **Dependencies flow down** (UI depends on hooks, hooks depend on stores, etc.).
