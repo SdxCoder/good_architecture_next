@@ -14,6 +14,14 @@ export class NetworkFailure extends ApplicationFailure {
     }
 }
 
+export class NotFoundFailure extends ApplicationFailure {
+    constructor(message = 'An unexpected error occurred') {
+        super(message);
+        this.name = 'UnexpectedFailure';
+    }
+}
+
+
 export class UnexpectedFailure extends ApplicationFailure {
     constructor(message = 'An unexpected error occurred') {
         super(message);
