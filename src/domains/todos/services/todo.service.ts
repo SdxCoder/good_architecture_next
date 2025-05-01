@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { TodoDto } from '../dtos/todo.dto';
 
-const API_BASE_URL = '/api/todos';
+const API_BASE_URL = 'http://localhost:3001/todos';
 
 export class TodoService {
     async getList(): Promise<TodoDto[]> {

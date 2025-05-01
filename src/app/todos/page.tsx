@@ -1,4 +1,5 @@
-// ... existing code ...
+'use client';
+
 import React from 'react';
 import { useTodosActions } from '@/src/domains/todos/hooks/use-todo-hook';
 import { TodoRepositoryImpl } from '@/src/domains/todos/repository/todo-repository-impl';
@@ -9,6 +10,7 @@ import { TodoListItem } from '@/src/domains/todos/components/todo-list-item';
 const repository = new TodoRepositoryImpl(new TodoService());
 
 export default function TodosListPage() {
+
     const { todos, isLoading, error, refetchTodos } = useTodosActions(repository);
 
     return (
