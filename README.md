@@ -114,3 +114,85 @@ This architecture:
 - Keeps code organized by business concern
 - Improves codebase readability and collaboration
 - Encourages reuse without sacrificing clarity
+
+---
+
+## 🧩 Domain-Driven Design (DDD) Logical Layers
+
+This project applies Domain-Driven Design (DDD) principles not just in folder structure, but also in logical layering and unidirectional flow. The architecture is divided into three logical layers, each with clear responsibilities and dependencies:
+
+### 1️⃣ Presentation Layer
+
+**Purpose:**  
+Handles all user interface and user interaction logic.
+
+**Responsibilities:**
+- **UI Components:** Render the user interface (e.g., TodoList, TodoItem).
+- **Hooks:** Encapsulate logic for components, interact with domain stores.
+- **Glue:** Hooks connect UI components to the domain layer (stores).
+
+**Dependency Flow:**  
+- Components depend on hooks.
+- Hooks use stores from the domain layer.
+
+---
+
+### 2️⃣ Domain Layer
+
+**Purpose:**  
+Encapsulates business logic, state management, and domain models.
+
+**Responsibilities:**
+- **Stores:** Manage state and actions (e.g., using Zustand).
+- **Entities:** Define domain models/entities.
+- **Repository Abstractions:** Define interfaces for data access, implemented in the data layer.
+
+**Dependency Flow:**  
+- Stores depend on repository abstractions.
+- Entities are mapped from DTOs provided by the data layer.
+
+---
+
+### 3️⃣ Data Layer
+
+**Purpose:**  
+Handles data access, API communication, and data transformation.
+
+**Responsibilities:**
+- **Services:**  
+  - Handle API requests (e.g., using Axios).
+  - Map raw JSON responses to DTOs.
+  - Return DTOs.
+- **Repositories (Concrete Implementations):**  
+  - Implement abstract repository interfaces from the domain layer.
+  - Depend on service classes.
+  - Catch and handle errors from services.
+  - On success, map DTOs to domain entities and return them.
+
+**Dependency Flow:**  
+- Concrete repositories implement domain repository abstractions.
+- Services are used by repositories for API/data access.
+
+---
+
+### 🔄 Unidirectional Flow
+
+UI Components
+↓
+Hooks
+↓
+Stores (Domain)
+↓
+Repository (Domain Abstraction)
+↓
+Repository (Data Implementation)
+↓
+Service (API/DTO)
+
+
+- **Data flows up** (from service to UI).
+- **Dependencies flow down** (UI depends on hooks, hooks depend on stores, etc.).
+
+---
+
+**This structure enforces separation of concerns, modularity, and a clear, maintainable codebase aligned with DDD principles.**
