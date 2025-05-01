@@ -24,6 +24,11 @@ export class Failure<F, S> {
     map<F2, S2>(onFailure: (f: F) => F2, onSuccess: (s: S) => S2): Either<F2, S2> {
         return new Failure<F2, S2>(onFailure(this.value));
     }
+
+    fold<R>(onFailure: (e: F) => R, _: (t: S) => R): R {
+        return onFailure(this.value);
+    }
+
 }
 
 export class Success<F, S> {
@@ -47,6 +52,12 @@ export class Success<F, S> {
     map<F2, S2>(onFailure: (f: F) => F2, onSuccess: (s: S) => S2): Either<F2, S2> {
         return new Success<F2, S2>(onSuccess(this.value));
     }
+
+    // Apply a function to the value depending on whether it's Failure or Success
+    fold<R>(_: (e: F) => R, onSuccess: (t: S) => R): R {
+        return onSuccess(this.value);
+    }
+
 }
 
 // Helper functions
